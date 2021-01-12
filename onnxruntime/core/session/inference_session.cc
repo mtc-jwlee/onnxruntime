@@ -424,13 +424,9 @@ common::Status InferenceSession::RegisterExecutionProvider(std::unique_ptr<IExec
       session_options_.execution_mode = ExecutionMode::ORT_SEQUENTIAL;
     }
 
-    if (session_options_.has_user_stream) {
-      p_exec_provider->SetComputeStream(session_options_.user_stream);
-    } else {
-      auto trt_ep = execution_providers_.Get(kTensorrtExecutionProvider);
-      if (trt_ep) {
-        p_exec_provider->SetComputeStream(trt_ep->GetComputeStream());
-      }
+    auto trt_ep = execution_providers_.Get(kTensorrtExecutionProvider);
+    if (trt_ep) {
+      p_exec_provider->SetComputeStream(trt_ep->GetComputeStream());
     }
   }
 

@@ -266,7 +266,18 @@ typedef struct OrtCUDAProviderOptions {
   size_t cuda_mem_limit;                          // default cuda memory limitation to maximum finite value of size_t.
   int arena_extend_strategy;                      // default area extend strategy to KNextPowerOfTwo.
   int do_copy_in_default_stream;
+  int has_user_compute_stream;
+  void* user_compute_stream;
 } OrtCUDAProviderOptions;
+
+/// <summary>
+/// Options for the TensorRT provider that are passed to SessionOptionsAppendExecutionProvider_TensorRT
+/// </summary>
+typedef struct OrtTensorRTProviderOptions {
+  int device_id;
+  int has_user_compute_stream;
+  void* user_compute_stream;
+} OrtTensorRTProviderOptions;
 
 /// <summary>
 /// Options for the OpenVINO provider that are passed to SessionOptionsAppendExecutionProvider_OpenVINO
@@ -1134,6 +1145,12 @@ struct OrtApi {
                   int max_dead_bytes_per_chunk, _Outptr_ OrtArenaCfg** out);
 
   ORT_CLASS_RELEASE(ArenaCfg);
+  /**
+   * Append TensorRT execution provider to the session options
+   * If TensorRT is not available (due to a non TensorRT enabled build), this function will return failure.
+   */
+  ORT_API2_STATUS(SessionOptionsAppendExecutionProvider_TensorRT,
+                  _In_ OrtSessionOptions* options, _In_ const OrtTensorRTProviderOptions* tensorrt_options);
 };
 
 /*

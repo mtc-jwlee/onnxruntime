@@ -27,6 +27,9 @@ project(onnxruntime C CXX)
 # Needed for Java
 set (CMAKE_C_STANDARD 99)
 
+SET(CMAKE_FIND_PACKAGE_SORT_ORDER NATURAL)
+SET(CMAKE_FIND_PACKAGE_SORT_DIRECTION DEC)
+
 include(CheckCXXCompilerFlag)
 include(CheckLanguage)
 

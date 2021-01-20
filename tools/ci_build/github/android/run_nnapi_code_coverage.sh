@@ -23,7 +23,8 @@ python3 ${ORT_ROOT}/tools/ci_build/build.py \
 	--use_nnapi \
 	--cmake_generator=Ninja \
 	--build_java \
-	--code_coverage
+	--code_coverage \
+	--cmake_extra_defines 'CMAKE_C_COMPILER=/usr/bin/clang CMAKE_CXX_COMPILER=/usr/bin/clang'
 
 # Install gcovr
 python3 -m pip install gcovr

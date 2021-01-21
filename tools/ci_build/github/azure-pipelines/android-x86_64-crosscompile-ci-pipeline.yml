@@ -12,6 +12,12 @@ jobs:
     inputs:
       versionSpec: $(pythonVersion)
 
+  - script: ls -la $ANDROID_HOME
+    displayName: ls -la $ANDROID_HOME
+
+  - script: ls -la $ANDROID_HOME/ndk
+    displayName: ls -la $ANDROID_HOME/ndk
+
   - script: brew install coreutils ninja
     displayName: Install coreutils and ninja
 

@@ -46,6 +46,10 @@ AsyncExecutionProvider::GetCapability(const GraphViewer& graph,
     });
     meta_def->since_version = 1;
     meta_def->status = ONNX_NAMESPACE::EXPERIMENTAL;
+    // TODO: add async related attribute to meta
+    // TODO: add stream to async EP
+    // TODO: add executor to async EP
+    // TODO: queue task from async_kernel to async EP' stream
     sub_graph->SetMetaDef(std::move(meta_def));
     result.push_back(make_unique<ComputeCapability>(std::move(sub_graph)));
   }

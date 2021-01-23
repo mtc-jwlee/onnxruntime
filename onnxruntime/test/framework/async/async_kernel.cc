@@ -15,6 +15,7 @@ AsyncKernelState::AsyncKernelState(
   ORT_ENFORCE(func_body != nullptr);
   const Graph& subgraph = func_body->Body();
   ORT_ENFORCE(subgraph.NumberOfNodes() == 1);
+  // TODO: add actual compute code
 }
 
 AsyncKernelState::~AsyncKernelState() {

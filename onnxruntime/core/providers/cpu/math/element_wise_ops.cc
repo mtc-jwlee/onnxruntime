@@ -295,7 +295,7 @@ static void UntypedBroadcastVariadic(int input_count, OpKernelContext& context,
                                      const ProcessBroadcastSpanFuncs& funcs);
 
 template <typename T>
-Status Add<T>::Compute(OpKernelContext* context) const {
+Status Add<T>::ComputeStatic(OpKernelContext* context) {
   // BroadcastHelper received as argument may differ from 'helper' when parallelizing within a span
   ProcessBroadcastSpanFuncs funcs{
       [](BroadcastHelper& per_iter_bh) {
@@ -313,7 +313,7 @@ Status Add<T>::Compute(OpKernelContext* context) const {
 }
 
 template <typename T>
-Status Sub<T>::Compute(OpKernelContext* context) const {
+Status Sub<T>::ComputeStatic(OpKernelContext* context) {
   ProcessBroadcastSpanFuncs funcs{
       [](BroadcastHelper& per_iter_bh) {
         per_iter_bh.OutputEigen<T>() = per_iter_bh.ScalarInput0<T>() - per_iter_bh.EigenInput1<T>().array();
@@ -330,7 +330,7 @@ Status Sub<T>::Compute(OpKernelContext* context) const {
 }
 
 template <typename T>
-Status Mul<T>::Compute(OpKernelContext* context) const {
+Status Mul<T>::ComputeStatic(OpKernelContext* context) {
   ProcessBroadcastSpanFuncs funcs{
       [](BroadcastHelper& per_iter_bh) {
         per_iter_bh.OutputEigen<T>() = per_iter_bh.ScalarInput0<T>() * per_iter_bh.EigenInput1<T>().array();

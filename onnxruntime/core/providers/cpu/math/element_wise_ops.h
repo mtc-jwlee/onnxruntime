@@ -211,7 +211,11 @@ class Add final : public OpKernel {
   Add(const OpKernelInfo& info) : OpKernel(info) {
   }
 
-  Status Compute(OpKernelContext* context) const override;
+  static Status ComputeStatic(OpKernelContext* context);
+
+  Status Compute(OpKernelContext* context) const override {
+    return ComputeStatic(context);
+  }
 };
 
 template <typename T>
@@ -220,7 +224,11 @@ class Sub final : public OpKernel {
   Sub(const OpKernelInfo& info) : OpKernel(info) {
   }
 
-  Status Compute(OpKernelContext* context) const override;
+  static Status ComputeStatic(OpKernelContext* context);
+
+  Status Compute(OpKernelContext* context) const override {
+    return ComputeStatic(context);
+  }
 };
 
 template <typename T>
@@ -229,7 +237,11 @@ class Mul final : public OpKernel {
   Mul(const OpKernelInfo& info) : OpKernel(info) {
   }
 
-  Status Compute(OpKernelContext* context) const override;
+  static Status ComputeStatic(OpKernelContext* context);
+
+  Status Compute(OpKernelContext* context) const override {
+    return ComputeStatic(context);
+  }
 };
 
 template <typename T>

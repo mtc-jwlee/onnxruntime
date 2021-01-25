@@ -9,6 +9,8 @@
 namespace onnxruntime {
 
 class AsyncExecutionProvider;
+class OpKernel;
+
 class AsyncKernelState {
  public:
   explicit AsyncKernelState(
@@ -24,7 +26,8 @@ class AsyncKernelState {
   const AsyncExecutionProvider& provider_;
 
   // Here ComputeContext of Ort is used for allocator
-  ComputeContext ctx_;  // the compute context from IExecutionProvider::Compile interface
+  ComputeContext ctx_;   // the compute context from IExecutionProvider::Compile interface
+  std::string op_type_;  // op type of the compute, since each subgraph only contains one node for now
 };
 
 }  // namespace onnxruntime

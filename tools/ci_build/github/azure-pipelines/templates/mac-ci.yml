@@ -23,6 +23,10 @@ jobs:
     - checkout: self
       ${{ if ne(parameters.SubmoduleCheckoutMode, '') }}:
         submodules: ${{ parameters.SubmoduleCheckoutMode }}
+    - task: UsePythonVersion@0
+      displayName: Use Python 3.8
+      inputs:
+        versionSpec: 3.8
     - task: NodeTool@0
       inputs:
         versionSpec: '12.x'

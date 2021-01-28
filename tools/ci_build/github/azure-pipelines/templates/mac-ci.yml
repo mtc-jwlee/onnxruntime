@@ -7,7 +7,7 @@ parameters:
   NuPackScript: ''
   ArtifactName: 'drop-osx'
   # Controls whether unreleased onnx opsets are allowed. Default is set to 1
-  AllowReleasedOpsetOnly: '1' 
+  AllowReleasedOpsetOnly: '1'
 
 jobs:
 - job: ${{ parameters.JobName }}
@@ -39,7 +39,7 @@ jobs:
         export CMAKE_ARGS="-DONNX_GEN_PB_TYPE_STUBS=OFF -DONNX_WERROR=OFF"
         sudo python3 -m pip install -r '$(Build.SourcesDirectory)/tools/ci_build/github/linux/docker/scripts/requirements.txt'
         sudo xcode-select --switch /Applications/Xcode_10.app/Contents/Developer
-        brew install libomp
+        brew install libomp ninja
         ${{ parameters.BuildCommand }}
       displayName: 'Build and Test OnnxRuntime lib for MacOS'
     - task: PublishTestResults@2

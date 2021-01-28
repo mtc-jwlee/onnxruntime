@@ -37,8 +37,8 @@ jobs:
         export CMAKE_GENERATOR=Ninja
         cd $(Build.SourcesDirectory)/cmake/external/protobuf
         cmake ./cmake -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/protobuf -DCMAKE_POSITION_INDEPENDENT_CODE=ON -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Relwithdebinfo
-        make -j$(getconf _NPROCESSORS_ONLN)
-        make install
+        ninja -j $(getconf _NPROCESSORS_ONLN)
+        ninja install
         popd
         export PATH=$(Build.BinariesDirectory)/protobuf/bin:$PATH
         export ONNX_ML=1

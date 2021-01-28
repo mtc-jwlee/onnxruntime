@@ -33,6 +33,8 @@ jobs:
     - script: |
         set -e
         pushd .
+        brew install libomp ninja
+        export CMAKE_GENERATOR=Ninja
         cd $(Build.SourcesDirectory)/cmake/external/protobuf
         cmake ./cmake -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/protobuf -DCMAKE_POSITION_INDEPENDENT_CODE=ON -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Relwithdebinfo
         make -j$(getconf _NPROCESSORS_ONLN)
@@ -43,7 +45,6 @@ jobs:
         export CMAKE_ARGS="-DONNX_GEN_PB_TYPE_STUBS=OFF -DONNX_WERROR=OFF"
         sudo python3 -m pip install -r '$(Build.SourcesDirectory)/tools/ci_build/github/linux/docker/scripts/requirements.txt'
         sudo xcode-select --switch /Applications/Xcode_10.app/Contents/Developer
-        brew install libomp ninja
         ${{ parameters.BuildCommand }}
       displayName: 'Build and Test OnnxRuntime lib for MacOS'
     - task: PublishTestResults@2

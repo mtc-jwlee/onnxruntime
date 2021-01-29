@@ -731,6 +731,11 @@ if (onnxruntime_USE_NNAPI_BUILTIN)
     "${ONNXRUNTIME_ROOT}/core/providers/nnapi/*.cc"
   )
 
+  file(GLOB_RECURSE onnxruntime_providers_shared_utils_cc_srcs CONFIGURE_DEPENDS
+    "${ONNXRUNTIME_ROOT}/core/providers/shared/utils.h"
+    "${ONNXRUNTIME_ROOT}/core/providers/shared/utils.cc"
+  )
+
   if(CMAKE_SYSTEM_NAME STREQUAL "Android")
     file(GLOB_RECURSE
       onnxruntime_providers_nnapi_cc_srcs_nested CONFIGURE_DEPENDS
@@ -750,7 +755,12 @@ if (onnxruntime_USE_NNAPI_BUILTIN)
     )
   endif()
 
-  set(onnxruntime_providers_nnapi_cc_srcs ${onnxruntime_providers_nnapi_cc_srcs_top} ${onnxruntime_providers_nnapi_cc_srcs_nested})
+  set(onnxruntime_providers_nnapi_cc_srcs
+    ${onnxruntime_providers_nnapi_cc_srcs_top}
+    ${onnxruntime_providers_nnapi_cc_srcs_nested}
+    ${onnxruntime_providers_shared_utils_cc_srcs}
+  )
+
   source_group(TREE ${ONNXRUNTIME_ROOT}/core FILES ${onnxruntime_providers_nnapi_cc_srcs})
   add_library(onnxruntime_providers_nnapi ${onnxruntime_providers_nnapi_cc_srcs})
   onnxruntime_add_include_to_target(onnxruntime_providers_nnapi onnxruntime_common onnxruntime_framework onnx onnx_proto protobuf::libprotobuf-lite flatbuffers)

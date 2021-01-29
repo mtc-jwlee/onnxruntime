@@ -16,6 +16,7 @@ Abstract:
 --*/
 
 #include "mlasi.h"
+#include <iostream>
 
 //
 // Define the parameters to execute segments of a QGEMM operation on worker
@@ -793,6 +794,21 @@ Return Value:
 
 --*/
 {
+    // const int16_t* A,
+    // const int16_t* B,
+    // int32_t* C,
+    // size_t PackedCountK,
+    // size_t CountN,
+    // const int32_t* RowSumBuffer,
+    // const int32_t* ColumnSumBuffer,
+    // int32_t DepthValue,
+    // bool ZeroMode
+    std::cout << "[MlasGemmU8X8KernelSse]" << std::endl;
+    std::cout << "PackedCountK: " << PackedCountK << std::endl;
+    std::cout << "CountN: " << CountN << std::endl;
+    std::cout << "DepthValue: " << DepthValue << std::endl;
+    std::cout << "ZeroMode: " << ZeroMode << std::endl;
+
     while (CountN > 0) {
 
         __m128i Accumulators[2];

@@ -157,7 +157,8 @@ Return Value:
     __cpuid(1, Cpuid1[0], Cpuid1[1], Cpuid1[2], Cpuid1[3]);
 #endif
 
-    if ((Cpuid1[2] & 0x18000000) == 0x18000000) {
+    if (0) { // for checking SSE2 version of GEMM
+    // if ((Cpuid1[2] & 0x18000000) == 0x18000000) {
 
         //
         // Check if the operating system supports saving SSE and AVX states.
